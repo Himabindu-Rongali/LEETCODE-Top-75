@@ -1,0 +1,38 @@
+class Solution {
+    public ListNode deleteMiddle(ListNode head) {
+        // Edge case: If the list is empty or has only one node
+        if (head == null || head.next == null) {
+            return null;
+        }
+
+        // Initialize pointers
+        ListNode cur = head;
+        int count = 0;
+        
+        // First pass to count the total number of nodes
+        while (cur != null) {
+            count++;
+            cur = cur.next;
+        }
+
+        // Determine the position of the node to be removed
+        int middleIndex = count / 2;
+        
+        // Edge case: If the list has exactly 2 nodes, remove the second node
+        if (count == 2) {
+            head.next = null;
+            return head;
+        }
+
+        // Move to the node just before the middle node
+        cur = head;
+        for (int i = 0; i < middleIndex - 1; i++) {
+            cur = cur.next;
+        }
+        
+        // Remove the middle node
+        cur.next = cur.next.next;
+        
+        return head;
+    }
+}
